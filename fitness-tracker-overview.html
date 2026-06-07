@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Overview — Longevity Fitness Tracker | Adalia Works</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --carolina: #4B9CD3;
+    --royal: #1A3FA3;
+    --navy: #163265;
+    --white: #ffffff;
+    --off-white: #f7f8fc;
+    --light-gray: #edf0f7;
+    --text: #1a1f36;
+    --text-muted: #5a6380;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--white);
+  }
+
+  .hero {
+    padding: 100px 60px 80px;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(75,156,211,0.12) 0%, transparent 70%);
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 2; }
+  .section-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--carolina);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    max-width: 760px;
+  }
+  .hero h1 span { color: var(--carolina); }
+  .hero p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    max-width: 620px;
+    font-weight: 300;
+  }
+
+  section { padding: 80px 60px; }
+  .inner { max-width: 1100px; margin: 0 auto; }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 600;
+    color: var(--navy);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    max-width: 720px;
+    margin-bottom: 48px;
+  }
+
+  .alt-bg { background: var(--off-white); }
+
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 32px;
+    border-top: 4px solid var(--carolina);
+    box-shadow: 0 1px 3px rgba(22,50,101,0.06);
+  }
+  .card:nth-child(2) { border-top-color: var(--royal); }
+  .card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .card p { font-size: 15px; line-height: 1.7; color: var(--text-muted); }
+
+  .wire-caption {
+    font-size: 13px;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 14px;
+    font-style: italic;
+  }
+  .wire-frame {
+    background: var(--off-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .feature-list { list-style: none; }
+  .feature-list li {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text-muted);
+    padding-left: 28px;
+    position: relative;
+    margin-bottom: 14px;
+  }
+  .feature-list li::before {
+    content: '↗';
+    position: absolute;
+    left: 0;
+    color: var(--carolina);
+    font-weight: 600;
+  }
+  .feature-list strong { color: var(--text); font-weight: 600; }
+
+  .status-pill {
+    display: inline-block;
+    background: var(--light-gray);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 6px 16px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+
+  footer {
+    padding: 48px 60px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    text-align: center;
+  }
+
+  @media (max-width: 860px) {
+    .grid-2 { grid-template-columns: 1fr; }
+    .hero, section { padding-left: 28px; padding-right: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <span class="section-label">Adalia Works · Venture in Progress</span>
+    <h1>A simple <span>fitness tracker</span> built for the long game</h1>
+    <p>A lean, web-based MVP for charting weightlifting goals and logging Zone&nbsp;2 cardio — designed for adults pursuing the longevity-focused training principles popularized by Peter Attia and similar voices in the field.</p>
+  </div>
+</div>
+
+<section>
+  <div class="inner">
+    <span class="status-pill">Stage: Lean MVP · Two-User Pilot</span>
+    <h2>Why we're building this</h2>
+    <p class="lede">Most fitness apps are built for aesthetics or competition. This one is built around two specific, evidence-informed goals: hitting a consistent weekly training frequency, and progressively increasing strength over time — paired with the often-overlooked discipline of regular Zone&nbsp;2 cardio. We're starting small (just two users — my wife and me), validating the core loop, and growing from there.</p>
+
+    <div class="grid-2">
+      <div class="card">
+        <h3>Strength, charted over time</h3>
+        <p>Custom workout rotations (e.g., "Upper A / Lower / Upper B"), built around a simple four-set structure — warm-up plus three working sets — with weight and rep logging that drives a built-in progression model: when reps climb, weight goes up.</p>
+      </div>
+      <div class="card">
+        <h3>Cardio, made measurable</h3>
+        <p>Zone 2 training is one of the simplest, highest-leverage longevity habits — and one of the easiest to skip. The app tracks duration, type, and time spent in Zone 2 or above, with weekly targets set during onboarding.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="inner">
+    <h2>Dashboard at a glance</h2>
+    <p class="lede">The home screen is built around momentum: a rolling 7-day view of training frequency, a one-tap entry into today's workout, and a quick read on cardio progress for the week.</p>
+
+    <div class="wire-frame">
+      <svg width="640" height="360" viewBox="0 0 640 360" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="640" height="360" rx="14" fill="#ffffff" stroke="#edf0f7"/>
+        <!-- header -->
+        <rect x="24" y="24" width="200" height="18" rx="4" fill="#163265"/>
+        <rect x="24" y="50" width="120" height="10" rx="3" fill="#5a6380" opacity="0.4"/>
+        <!-- frequency counter card -->
+        <rect x="24" y="90" width="280" height="110" rx="10" fill="#f7f8fc" stroke="#edf0f7"/>
+        <text x="44" y="120" font-family="DM Sans, sans-serif" font-size="13" fill="#5a6380">THIS WEEK'S WORKOUTS</text>
+        <text x="44" y="165" font-family="Playfair Display, serif" font-size="36" font-weight="700" fill="#1A3FA3">3 of 4</text>
+        <rect x="44" y="178" width="240" height="8" rx="4" fill="#edf0f7"/>
+        <rect x="44" y="178" width="180" height="8" rx="4" fill="#4B9CD3"/>
+        <!-- cardio counter card -->
+        <rect x="320" y="90" width="296" height="110" rx="10" fill="#f7f8fc" stroke="#edf0f7"/>
+        <text x="340" y="120" font-family="DM Sans, sans-serif" font-size="13" fill="#5a6380">CARDIO SESSIONS (ZONE 2+)</text>
+        <text x="340" y="165" font-family="Playfair Display, serif" font-size="36" font-weight="700" fill="#1A3FA3">1 of 3</text>
+        <rect x="340" y="178" width="256" height="8" rx="4" fill="#edf0f7"/>
+        <rect x="340" y="178" width="86" height="8" rx="4" fill="#4B9CD3"/>
+        <!-- CTA button -->
+        <rect x="24" y="226" width="592" height="56" rx="8" fill="#1A3FA3"/>
+        <text x="320" y="260" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" letter-spacing="2" fill="#ffffff" text-anchor="middle">START TODAY'S WORKOUT — UPPER A</text>
+        <!-- mini chart preview -->
+        <rect x="24" y="300" width="592" height="40" rx="8" fill="#f7f8fc" stroke="#edf0f7"/>
+        <text x="44" y="325" font-family="DM Sans, sans-serif" font-size="12" fill="#5a6380">Past 90 days · Daily volume — tap to expand chart ↗</text>
+      </svg>
+    </div>
+    <p class="wire-caption">Wireframe — dashboard home: rolling frequency counters, one-tap workout launch, expandable progress chart</p>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>A workout that adapts to a busy gym</h2>
+    <p class="lede">Rather than forcing a strict order, each workout opens as a tappable list of exercises. Start whichever one is open — when a machine's in use, just move to the next. As each exercise is completed, it automatically drops to the bottom of the list, so what's left always rises to the top.</p>
+
+    <div class="wire-frame">
+      <svg width="420" height="460" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="420" height="460" rx="20" fill="#ffffff" stroke="#edf0f7"/>
+        <rect x="24" y="28" width="160" height="18" rx="4" fill="#163265"/>
+        <text x="24" y="64" font-family="DM Sans, sans-serif" font-size="12" fill="#5a6380">UPPER A · 4 EXERCISES</text>
+
+        <!-- exercise card 1: in progress -->
+        <rect x="24" y="86" width="372" height="70" rx="10" fill="#f7f8fc" stroke="#4B9CD3" stroke-width="2"/>
+        <text x="44" y="115" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#1a1f36">Bench Press</text>
+        <text x="44" y="136" font-family="DM Sans, sans-serif" font-size="12" fill="#4B9CD3">● In progress — set 2 of 4</text>
+
+        <!-- exercise card 2: not started -->
+        <rect x="24" y="166" width="372" height="70" rx="10" fill="#ffffff" stroke="#edf0f7"/>
+        <text x="44" y="195" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#1a1f36">Lat Pulldown</text>
+        <text x="44" y="216" font-family="DM Sans, sans-serif" font-size="12" fill="#5a6380">Not started</text>
+
+        <!-- exercise card 3: not started -->
+        <rect x="24" y="246" width="372" height="70" rx="10" fill="#ffffff" stroke="#edf0f7"/>
+        <text x="44" y="275" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#1a1f36">Overhead Press</text>
+        <text x="44" y="296" font-family="DM Sans, sans-serif" font-size="12" fill="#5a6380">Not started</text>
+
+        <!-- exercise card 4: complete, sent to bottom -->
+        <rect x="24" y="326" width="372" height="70" rx="10" fill="#f7f8fc" stroke="#edf0f7" opacity="0.6"/>
+        <text x="44" y="355" font-family="DM Sans, sans-serif" font-size="15" font-weight="600" fill="#5a6380" text-decoration="line-through">Seated Row</text>
+        <text x="44" y="376" font-family="DM Sans, sans-serif" font-size="12" fill="#4B9CD3">✓ Complete — moved to bottom</text>
+
+        <rect x="24" y="412" width="372" height="32" rx="16" fill="#edf0f7"/>
+        <text x="210" y="433" font-family="DM Sans, sans-serif" font-size="12" fill="#5a6380" text-anchor="middle">Tap any card to begin logging sets</text>
+      </svg>
+    </div>
+    <p class="wire-caption">Wireframe — workout home: tap-to-start exercise list, auto-sorts completed items to the bottom</p>
+  </div>
+</section>
+
+<section class="alt-bg">
+  <div class="inner">
+    <h2>Progress you can actually see</h2>
+    <p class="lede">A single, flexible chart pattern — choose your time range and your granularity — used consistently across the dashboard and individual exercises. Daily bars make rest days, vacations, and comeback stretches visible at a glance.</p>
+
+    <div class="wire-frame">
+      <svg width="640" height="340" viewBox="0 0 640 340" xmlns="http://www.w3.org/2000/svg">
+        <rect x="0" y="0" width="640" height="340" rx="14" fill="#ffffff" stroke="#edf0f7"/>
+        <text x="24" y="36" font-family="Playfair Display, serif" font-size="18" font-weight="600" fill="#163265">Bench Press — Volume Trend</text>
+
+        <!-- dropdown controls -->
+        <rect x="24" y="52" width="140" height="32" rx="6" fill="#f7f8fc" stroke="#edf0f7"/>
+        <text x="38" y="73" font-family="DM Sans, sans-serif" font-size="12" fill="#1a1f36">Past 90 Days ▾</text>
+        <rect x="176" y="52" width="140" height="32" rx="6" fill="#f7f8fc" stroke="#edf0f7"/>
+        <text x="190" y="73" font-family="DM Sans, sans-serif" font-size="12" fill="#1a1f36">Chart: Daily ▾</text>
+
+        <!-- bars: simulate 90 days w/ a vacation gap -->
+        <g>
+          <!-- baseline -->
+          <line x1="24" y1="300" x2="616" y2="300" stroke="#edf0f7" stroke-width="1"/>
+          <!-- bars before vacation -->
+          <rect x="28" y="230" width="6" height="70" fill="#60a5fa"/>
+          <rect x="38" y="220" width="6" height="80" fill="#60a5fa"/>
+          <rect x="48" y="205" width="6" height="95" fill="#60a5fa"/>
+          <rect x="58" y="195" width="6" height="105" fill="#60a5fa"/>
+          <rect x="68" y="180" width="6" height="120" fill="#60a5fa"/>
+          <rect x="78" y="170" width="6" height="130" fill="#60a5fa"/>
+          <rect x="88" y="160" width="6" height="140" fill="#60a5fa"/>
+          <rect x="98" y="150" width="6" height="150" fill="#60a5fa"/>
+          <rect x="108" y="145" width="6" height="155" fill="#60a5fa"/>
+          <rect x="118" y="140" width="6" height="160" fill="#60a5fa"/>
+          <rect x="128" y="135" width="6" height="165" fill="#60a5fa"/>
+          <rect x="138" y="130" width="6" height="170" fill="#60a5fa"/>
+          <rect x="148" y="128" width="6" height="172" fill="#60a5fa"/>
+          <rect x="158" y="124" width="6" height="176" fill="#60a5fa"/>
+          <rect x="168" y="120" width="6" height="180" fill="#60a5fa"/>
+          <rect x="178" y="118" width="6" height="182" fill="#60a5fa"/>
+          <rect x="188" y="115" width="6" height="185" fill="#60a5fa"/>
+          <rect x="198" y="112" width="6" height="188" fill="#60a5fa"/>
+          <rect x="208" y="110" width="6" height="190" fill="#60a5fa"/>
+          <rect x="218" y="108" width="6" height="192" fill="#60a5fa"/>
+
+          <!-- vacation gap (empty days) -->
+          <rect x="232" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="244" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="256" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="268" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="280" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="292" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="304" y="296" width="6" height="4" fill="#e5e7eb"/>
+          <rect x="316" y="296" width="6" height="4" fill="#e5e7eb"/>
+
+          <!-- dip + recovery (highlighted) -->
+          <rect x="330" y="240" width="6" height="60" fill="#fca5a5"/>
+          <rect x="342" y="225" width="6" height="75" fill="#fca5a5"/>
+          <rect x="354" y="215" width="6" height="85" fill="#fca5a5"/>
+          <rect x="366" y="205" width="6" height="95" fill="#fca5a5"/>
+          <rect x="378" y="195" width="6" height="105" fill="#fca5a5"/>
+
+          <!-- back to climbing -->
+          <rect x="392" y="180" width="6" height="120" fill="#60a5fa"/>
+          <rect x="404" y="165" width="6" height="135" fill="#60a5fa"/>
+          <rect x="416" y="155" width="6" height="145" fill="#60a5fa"/>
+          <rect x="428" y="145" width="6" height="155" fill="#60a5fa"/>
+          <rect x="440" y="135" width="6" height="165" fill="#60a5fa"/>
+          <rect x="452" y="128" width="6" height="172" fill="#60a5fa"/>
+          <rect x="464" y="120" width="6" height="180" fill="#60a5fa"/>
+          <rect x="476" y="115" width="6" height="185" fill="#60a5fa"/>
+          <rect x="488" y="108" width="6" height="192" fill="#60a5fa"/>
+          <rect x="500" y="102" width="6" height="198" fill="#60a5fa"/>
+          <rect x="512" y="98" width="6" height="202" fill="#60a5fa"/>
+          <rect x="524" y="92" width="6" height="208" fill="#60a5fa"/>
+          <rect x="536" y="88" width="6" height="212" fill="#60a5fa"/>
+          <rect x="548" y="84" width="6" height="216" fill="#60a5fa"/>
+          <rect x="560" y="80" width="6" height="220" fill="#60a5fa"/>
+          <rect x="572" y="76" width="6" height="224" fill="#60a5fa"/>
+          <rect x="584" y="72" width="6" height="228" fill="#60a5fa"/>
+          <rect x="596" y="68" width="6" height="232" fill="#60a5fa"/>
+          <rect x="608" y="64" width="6" height="236" fill="#60a5fa"/>
+        </g>
+        <text x="24" y="320" font-family="DM Sans, sans-serif" font-size="11" fill="#5a6380">Day 1</text>
+        <text x="280" y="320" font-family="DM Sans, sans-serif" font-size="11" fill="#5a6380">Two-week break</text>
+        <text x="580" y="320" font-family="DM Sans, sans-serif" font-size="11" fill="#5a6380">Day 90</text>
+      </svg>
+    </div>
+    <p class="wire-caption">Wireframe — flexible volume chart with range &amp; granularity selectors; sample data shows a steady climb, a two-week break, and a comeback</p>
+  </div>
+</section>
+
+<section>
+  <div class="inner">
+    <h2>What's in the MVP</h2>
+    <ul class="feature-list">
+      <li><strong>Custom workout rotations</strong> — user-defined splits (e.g., Upper/Lower, Push/Pull/Legs) with a standard exercise library plus custom additions</li>
+      <li><strong>Four-set logging structure</strong> — warm-up plus three working sets, pre-filled and editable, built around a double-progression strength model</li>
+      <li><strong>Zone 2 cardio tracking</strong> — duration, activity type (with a growing shared preset list), and time spent in Zone 2 or above</li>
+      <li><strong>Shareable progress</strong> — invite a friend (view-only) or a coach (suggest or directly adjust your rep/weight targets) via a simple shareable link</li>
+      <li><strong>Smart, pace-aware reminders</strong> — SMS or email nudges that adapt to how close you are to hitting your weekly goals</li>
+      <li><strong>"Workout Complete" summary</strong> — duration, exercise count, and a satisfying total-pounds-lifted number to close out every session</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  © 2026 Adalia Works — Project overview, subject to change as the MVP evolves through user testing.
+</footer>
+
+</body>
+</html>
