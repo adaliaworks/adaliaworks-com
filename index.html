@@ -224,7 +224,7 @@
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
     gap: 32px;
   }
   .venture-card {
@@ -236,6 +236,7 @@
     flex-direction: column;
   }
   .venture-card:nth-child(2) { border-top-color: var(--royal); }
+  .venture-card:nth-child(3) { border-top-color: var(--navy); }
   .venture-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 24px;
@@ -287,7 +288,7 @@
     .advisors-inner { grid-template-columns: 1fr; gap: 48px; }
     .advisors-logo { order: -1; }
     .ventures { padding: 80px 32px; }
-    .ventures-grid { grid-template-columns: 1fr; }
+    .ventures-grid { grid-template-columns: 1fr 1fr; }
     footer { padding: 32px; }
   }
 
@@ -384,6 +385,13 @@
       <a href="https://doors.adaliaworks.com" class="venture-url" target="_blank" rel="noopener">doors.adaliaworks.com ↗</a>
       <p>A simple web app that pulls data from the Guilford County, NC GIS for demographic research.</p>
       <a href="https://doors.adaliaworks.com" class="btn btn-outline" target="_blank" rel="noopener">Open Doors</a>
+    </div>
+
+    <div class="venture-card">
+      <h3>Longevity Fitness Tracker</h3>
+      <a href="fitness-tracker-overview.html" class="venture-url">adaliaworks.com ↗</a>
+      <p>A lean, web-based fitness tracker built for the long game — charting weightlifting goals and logging Zone 2 cardio for adults pursuing the longevity-focused training principles popularized by Peter Attia and similar voices in the field.</p>
+      <a href="fitness-tracker-overview.html" class="btn btn-outline">Learn More</a>
     </div>
 
   </div>
