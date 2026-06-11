@@ -1,408 +1,590 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adalia Works</title>
-<link rel="icon" type="image/x-icon" href="img/aw-favicon.ico">
-<link rel="icon" type="image/png" href="img/aw-logo.png">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --carolina: #4B9CD3;
-    --royal: #1A3FA3;
-    --navy: #163265;
-    --white: #ffffff;
-    --off-white: #f7f8fc;
-    --light-gray: #edf0f7;
-    --text: #1a1f36;
-    --text-muted: #5a6380;
-  }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Adalia Works</title>
+        <link rel="icon" type="image/x-icon" href="img/aw-favicon.ico" />
+        <link rel="icon" type="image/png" href="img/aw-logo.png" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                --carolina: #4b9cd3;
+                --royal: #1a3fa3;
+                --navy: #163265;
+                --white: #ffffff;
+                --off-white: #f7f8fc;
+                --light-gray: #edf0f7;
+                --text: #1a1f36;
+                --text-muted: #5a6380;
+            }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    color: var(--text);
-    background: var(--white);
-    overflow-x: hidden;
-  }
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            html {
+                scroll-behavior: smooth;
+            }
+            body {
+                font-family: "DM Sans", sans-serif;
+                color: var(--text);
+                background: var(--white);
+                overflow-x: hidden;
+            }
 
-  /* ── NAV ── */
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 60px;
-    background: rgba(255,255,255,0.97);
-    border-bottom: 1px solid var(--light-gray);
-  }
-  .nav-logo a { display: block; line-height: 0; }
-  .nav-logo img { height: 44px; display: block; }
-  #nav-toggle { display: none; }
-  .nav-hamburger {
-    display: none;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 4px;
-  }
-  .nav-hamburger span {
-    display: block;
-    width: 24px; height: 2px;
-    background: var(--text);
-    border-radius: 2px;
-    transition: transform 0.3s, opacity 0.3s;
-  }
-  .nav-links {
-    display: flex;
-    gap: 40px;
-    list-style: none;
-    align-items: center;
-  }
-  .nav-links a {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-decoration: none;
-    color: var(--text);
-    text-transform: uppercase;
-    transition: color 0.2s;
-  }
-  .nav-links a:hover { color: var(--carolina); }
-  .nav-cta {
-    background: var(--royal) !important;
-    color: var(--white) !important;
-    padding: 10px 24px;
-    border-radius: 4px;
-  }
-  .nav-cta:hover { background: var(--carolina) !important; }
+            /* ── NAV ── */
+            nav {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 100;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 14px 60px;
+                background: rgba(255, 255, 255, 0.97);
+                border-bottom: 1px solid var(--light-gray);
+            }
+            .nav-logo a {
+                display: block;
+                line-height: 0;
+            }
+            .nav-logo img {
+                height: 44px;
+                display: block;
+            }
+            #nav-toggle {
+                display: none;
+            }
+            .nav-hamburger {
+                display: none;
+                flex-direction: column;
+                gap: 5px;
+                cursor: pointer;
+                padding: 4px;
+            }
+            .nav-hamburger span {
+                display: block;
+                width: 24px;
+                height: 2px;
+                background: var(--text);
+                border-radius: 2px;
+                transition:
+                    transform 0.3s,
+                    opacity 0.3s;
+            }
+            .nav-links {
+                display: flex;
+                gap: 40px;
+                list-style: none;
+                align-items: center;
+            }
+            .nav-links a {
+                font-size: 13px;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-decoration: none;
+                color: var(--text);
+                text-transform: uppercase;
+                transition: color 0.2s;
+            }
+            .nav-links a:hover {
+                color: var(--carolina);
+            }
+            .nav-cta {
+                background: var(--royal) !important;
+                color: var(--white) !important;
+                padding: 10px 24px;
+                border-radius: 4px;
+            }
+            .nav-cta:hover {
+                background: var(--carolina) !important;
+            }
 
-  /* ── HERO ── */
-  .hero {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    background: var(--navy);
-    position: relative;
-    overflow: hidden;
-    padding: 120px 60px 80px;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -120px; right: -80px;
-    width: 700px; height: 700px;
-    background: radial-gradient(circle, rgba(75,156,211,0.12) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-    position: relative;
-    z-index: 2;
-  }
-  .hero-text h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(42px, 5vw, 68px);
-    font-weight: 700;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 28px;
-  }
-  .hero-text h1 span { color: var(--carolina); }
-  .hero-text p {
-    font-size: 18px;
-    line-height: 1.7;
-    color: rgba(255,255,255,0.72);
-    max-width: 480px;
-    font-weight: 300;
-  }
-  .hero-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .hero-logo img {
-    width: 340px;
-    max-width: 100%;
-  }
+            /* ── HERO ── */
+            .hero {
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                background: var(--navy);
+                position: relative;
+                overflow: hidden;
+                padding: 120px 60px 80px;
+            }
+            .hero::before {
+                content: "";
+                position: absolute;
+                top: -120px;
+                right: -80px;
+                width: 700px;
+                height: 700px;
+                background: radial-gradient(
+                    circle,
+                    rgba(75, 156, 211, 0.12) 0%,
+                    transparent 70%
+                );
+                pointer-events: none;
+            }
+            .hero-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+                align-items: center;
+                position: relative;
+                z-index: 2;
+            }
+            .hero-text h1 {
+                font-family: "Playfair Display", serif;
+                font-size: clamp(42px, 5vw, 68px);
+                font-weight: 700;
+                color: var(--white);
+                line-height: 1.1;
+                margin-bottom: 28px;
+            }
+            .hero-text h1 span {
+                color: var(--carolina);
+            }
+            .hero-text p {
+                font-size: 18px;
+                line-height: 1.7;
+                color: rgba(255, 255, 255, 0.72);
+                max-width: 480px;
+                font-weight: 300;
+            }
+            .hero-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .hero-logo img {
+                width: 340px;
+                max-width: 100%;
+            }
 
-  /* ── SECTION SHARED ── */
-  .section-label {
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    color: var(--carolina);
-    margin-bottom: 16px;
-    display: block;
-  }
+            /* ── SECTION SHARED ── */
+            .section-label {
+                font-size: 18px;
+                font-weight: 600;
+                letter-spacing: 0.2em;
+                text-transform: uppercase;
+                color: var(--carolina);
+                margin-bottom: 16px;
+                display: block;
+            }
 
-  /* ── ADVISORS ── */
-  .advisors {
-    padding: 120px 60px;
-    background: var(--white);
-  }
-  .advisors-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-    align-items: center;
-  }
-  .advisors-text h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(32px, 4vw, 48px);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-    margin-bottom: 24px;
-  }
-  .advisors-text p {
-    font-size: 17px;
-    line-height: 1.8;
-    color: var(--text-muted);
-    margin-bottom: 36px;
-  }
-  .advisors-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .advisors-logo img {
-    width: 280px;
-    max-width: 100%;
-  }
-  .btn {
-    display: inline-block;
-    background: var(--royal);
-    color: var(--white);
-    text-decoration: none;
-    padding: 14px 32px;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    transition: background 0.2s;
-  }
-  .btn:hover { background: var(--carolina); }
-  .btn-outline {
-    background: transparent;
-    border: 2px solid var(--royal);
-    color: var(--royal);
-  }
-  .btn-outline:hover { background: var(--royal); color: var(--white); }
+            /* ── ADVISORS ── */
+            .advisors {
+                padding: 120px 60px;
+                background: var(--white);
+            }
+            .advisors-inner {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 80px;
+                align-items: center;
+            }
+            .advisors-text h2 {
+                font-family: "Playfair Display", serif;
+                font-size: clamp(32px, 4vw, 48px);
+                font-weight: 600;
+                color: var(--navy);
+                line-height: 1.2;
+                margin-bottom: 24px;
+            }
+            .advisors-text p {
+                font-size: 17px;
+                line-height: 1.8;
+                color: var(--text-muted);
+                margin-bottom: 36px;
+            }
+            .advisors-logo {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .advisors-logo img {
+                width: 280px;
+                max-width: 100%;
+            }
+            .btn {
+                display: inline-block;
+                background: var(--royal);
+                color: var(--white);
+                text-decoration: none;
+                padding: 14px 32px;
+                font-size: 14px;
+                font-weight: 600;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                border-radius: 4px;
+                transition: background 0.2s;
+            }
+            .btn:hover {
+                background: var(--carolina);
+            }
+            .btn-outline {
+                background: transparent;
+                border: 2px solid var(--royal);
+                color: var(--royal);
+            }
+            .btn-outline:hover {
+                background: var(--royal);
+                color: var(--white);
+            }
 
-  /* ── VENTURES ── */
-  .ventures {
-    padding: 120px 60px;
-    background: var(--off-white);
-  }
-  .ventures-header {
-    max-width: 1200px;
-    margin: 0 auto 64px;
-  }
-  .ventures-header h2 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(30px, 4vw, 46px);
-    font-weight: 600;
-    color: var(--navy);
-    line-height: 1.2;
-  }
-  .ventures-grid {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
-  }
-  .venture-card {
-    background: var(--white);
-    border-radius: 8px;
-    padding: 48px 40px;
-    border-top: 4px solid var(--carolina);
-    display: flex;
-    flex-direction: column;
-  }
-  .venture-card:nth-child(2) { border-top-color: var(--royal); }
-  .venture-card:nth-child(3) { border-top-color: var(--navy); }
-  .venture-card h3 {
-    font-family: 'Playfair Display', serif;
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .venture-url {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    color: var(--carolina);
-    text-transform: uppercase;
-    text-decoration: none;
-    margin-bottom: 20px;
-    display: block;
-  }
-  .venture-url:hover { color: var(--royal); }
-  .venture-card p {
-    font-size: 15px;
-    line-height: 1.75;
-    color: var(--text-muted);
-    flex: 1;
-    margin-bottom: 32px;
-  }
+            /* ── VENTURES ── */
+            .ventures {
+                padding: 120px 60px;
+                background: var(--off-white);
+            }
+            .ventures-header {
+                max-width: 1200px;
+                margin: 0 auto 64px;
+            }
+            .ventures-header h2 {
+                font-family: "Playfair Display", serif;
+                font-size: clamp(30px, 4vw, 46px);
+                font-weight: 600;
+                color: var(--navy);
+                line-height: 1.2;
+            }
+            .ventures-grid {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 32px;
+            }
+            .venture-card {
+                background: var(--white);
+                border-radius: 8px;
+                padding: 48px 40px;
+                border-top: 4px solid var(--carolina);
+                display: flex;
+                flex-direction: column;
+            }
+            .venture-card:nth-child(2) {
+                border-top-color: var(--royal);
+            }
+            .venture-card:nth-child(3) {
+                border-top-color: var(--navy);
+            }
+            .venture-card h3 {
+                font-family: "Playfair Display", serif;
+                font-size: 24px;
+                font-weight: 600;
+                color: var(--navy);
+                margin-bottom: 8px;
+            }
+            .venture-url {
+                font-size: 12px;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                color: var(--carolina);
+                text-transform: uppercase;
+                text-decoration: none;
+                margin-bottom: 20px;
+                display: block;
+            }
+            .venture-url:hover {
+                color: var(--royal);
+            }
+            .venture-card p {
+                font-size: 15px;
+                line-height: 1.75;
+                color: var(--text-muted);
+                flex: 1;
+                margin-bottom: 32px;
+            }
 
-  /* ── FOOTER ── */
-  footer {
-    background: #0a1a3a;
-    padding: 40px 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-top: 1px solid rgba(255,255,255,0.06);
-  }
-  footer a { display: block; line-height: 0; }
-  footer img { height: 32px; display: block; }
-  footer p { font-size: 13px; color: rgba(255,255,255,0.3); }
+            /* ── FOOTER ── */
+            footer {
+                background: #0a1a3a;
+                padding: 40px 60px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-top: 1px solid rgba(255, 255, 255, 0.06);
+            }
+            footer a {
+                display: block;
+                line-height: 0;
+            }
+            footer img {
+                height: 32px;
+                display: block;
+            }
+            footer p {
+                font-size: 13px;
+                color: rgba(255, 255, 255, 0.3);
+            }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 14px 32px; }
-    .hero { padding: 100px 32px 60px; }
-    .hero-inner { grid-template-columns: 1fr; gap: 48px; text-align: center; }
-    .hero-text p { margin: 0 auto 44px; }
-    .hero-logo { order: -1; }
-    .hero-logo img { width: 220px; }
-    .advisors { padding: 80px 32px; }
-    .advisors-inner { grid-template-columns: 1fr; gap: 48px; }
-    .advisors-logo { order: -1; }
-    .ventures { padding: 80px 32px; }
-    .ventures-grid { grid-template-columns: 1fr 1fr; }
-    footer { padding: 32px; }
-  }
+            /* ── RESPONSIVE ── */
+            @media (max-width: 900px) {
+                nav {
+                    padding: 14px 32px;
+                }
+                .hero {
+                    padding: 100px 32px 60px;
+                }
+                .hero-inner {
+                    grid-template-columns: 1fr;
+                    gap: 48px;
+                    text-align: center;
+                }
+                .hero-text p {
+                    margin: 0 auto 44px;
+                }
+                .hero-logo {
+                    order: -1;
+                }
+                .hero-logo img {
+                    width: 220px;
+                }
+                .advisors {
+                    padding: 80px 32px;
+                }
+                .advisors-inner {
+                    grid-template-columns: 1fr;
+                    gap: 48px;
+                }
+                .advisors-logo {
+                    order: -1;
+                }
+                .ventures {
+                    padding: 80px 32px;
+                }
+                .ventures-grid {
+                    grid-template-columns: 1fr 1fr;
+                }
+                footer {
+                    padding: 32px;
+                }
+            }
 
-  @media (max-width: 640px) {
-    nav { padding: 14px 20px; flex-wrap: wrap; }
-    .nav-hamburger { display: flex; }
-    .nav-links {
-      display: none;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 0;
-      width: 100%;
-      margin-top: 12px;
-      border-top: 1px solid var(--light-gray);
-      padding-top: 12px;
-    }
-    .nav-links li { width: 100%; }
-    .nav-links a { display: block; padding: 12px 4px; font-size: 14px; border-bottom: 1px solid var(--light-gray); }
-    .nav-links .nav-cta { margin-top: 12px; text-align: center; border-radius: 4px; border-bottom: none; }
-    #nav-toggle:checked ~ .nav-links { display: flex; }
-    .hero { padding: 90px 20px 60px; min-height: auto; }
-    .advisors { padding: 60px 20px; }
-    .ventures { padding: 60px 20px; }
-    .venture-card { padding: 32px 24px; }
-    footer { padding: 28px 20px; flex-direction: column; gap: 16px; text-align: center; }
-  }
-</style>
-</head>
-<body>
+            @media (max-width: 640px) {
+                nav {
+                    padding: 14px 20px;
+                    flex-wrap: wrap;
+                }
+                .nav-hamburger {
+                    display: flex;
+                }
+                .nav-links {
+                    display: none;
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0;
+                    width: 100%;
+                    margin-top: 12px;
+                    border-top: 1px solid var(--light-gray);
+                    padding-top: 12px;
+                }
+                .nav-links li {
+                    width: 100%;
+                }
+                .nav-links a {
+                    display: block;
+                    padding: 12px 4px;
+                    font-size: 14px;
+                    border-bottom: 1px solid var(--light-gray);
+                }
+                .nav-links .nav-cta {
+                    margin-top: 12px;
+                    text-align: center;
+                    border-radius: 4px;
+                    border-bottom: none;
+                }
+                #nav-toggle:checked ~ .nav-links {
+                    display: flex;
+                }
+                .hero {
+                    padding: 90px 20px 60px;
+                    min-height: auto;
+                }
+                .advisors {
+                    padding: 60px 20px;
+                }
+                .ventures {
+                    padding: 60px 20px;
+                }
+                .venture-card {
+                    padding: 32px 24px;
+                }
+                footer {
+                    padding: 28px 20px;
+                    flex-direction: column;
+                    gap: 16px;
+                    text-align: center;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <nav>
+            <div class="nav-logo">
+                <a href="#top" aria-label="Adalia Works — home">
+                    <img src="img/aw-logo.png" alt="Adalia Works" />
+                </a>
+            </div>
+            <input type="checkbox" id="nav-toggle" />
+            <label for="nav-toggle" aria-label="Toggle navigation">
+                <div class="nav-hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </label>
+            <ul class="nav-links">
+                <li><a href="#advisors">Advisors</a></li>
+                <li><a href="#ventures">Ventures</a></li>
+                <li>
+                    <a
+                        href="https://adaliaadvisors.com"
+                        class="nav-cta"
+                        target="_blank"
+                        rel="noopener"
+                        >Adalia Advisors</a
+                    >
+                </li>
+            </ul>
+        </nav>
 
-<nav>
-  <div class="nav-logo">
-    <a href="#top" aria-label="Adalia Works — home">
-      <img src="img/aw-logo.png" alt="Adalia Works">
-    </a>
-  </div>
-  <input type="checkbox" id="nav-toggle">
-  <label for="nav-toggle" aria-label="Toggle navigation">
-    <div class="nav-hamburger">
-      <span></span><span></span><span></span>
-    </div>
-  </label>
-  <ul class="nav-links">
-    <li><a href="#advisors">Advisors</a></li>
-    <li><a href="#ventures">Ventures</a></li>
-    <li><a href="https://adaliaadvisors.com" class="nav-cta" target="_blank" rel="noopener">Adalia Advisors</a></li>
-  </ul>
-</nav>
+        <div id="top"></div>
 
-<div id="top"></div>
+        <section class="hero">
+            <div class="hero-inner">
+                <div class="hero-text">
+                    <h1>Ideas worth <span>building on.</span></h1>
+                    <p>
+                        Adalia Works is a small studio behind a growing
+                        collection of ventures — from strategic consulting to
+                        software to ideas we couldn't stop thinking about.
+                    </p>
+                </div>
+                <div class="hero-logo">
+                    <img src="img/aw-words.png" alt="Adalia Works" />
+                </div>
+            </div>
+        </section>
 
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-text">
-      <h1>Ideas worth <span>building.</span></h1>
-      <p>Adalia Works is a small studio behind a growing collection of ventures — from strategic consulting to software to ideas we couldn't stop thinking about.</p>
-    </div>
-    <div class="hero-logo">
-      <img src="img/aw-words.png" alt="Adalia Works">
-    </div>
-  </div>
-</section>
+        <section class="advisors" id="advisors">
+            <div class="advisors-inner">
+                <div class="advisors-text">
+                    <span class="section-label">Adalia Advisors</span>
+                    <h2>
+                        Strategic consulting for founders who mean business.
+                    </h2>
+                    <p>
+                        Adalia Advisors partners with founders and CEOs to build
+                        the operating discipline, strategic clarity, and
+                        transaction readiness that drives lasting growth —
+                        through Traction facilitation, long-term strategic
+                        planning, and M&amp;A advisory.
+                    </p>
+                    <a
+                        href="https://adaliaadvisors.com"
+                        class="btn"
+                        target="_blank"
+                        rel="noopener"
+                        >Visit Adalia Advisors</a
+                    >
+                </div>
+                <div class="advisors-logo">
+                    <img src="img/aa-words.png" alt="Adalia Advisors" />
+                </div>
+            </div>
+        </section>
 
-<section class="advisors" id="advisors">
-  <div class="advisors-inner">
-    <div class="advisors-text">
-      <span class="section-label">Adalia Advisors</span>
-      <h2>Strategic consulting for founders who mean business.</h2>
-      <p>Adalia Advisors partners with founders and CEOs to build the operating discipline, strategic clarity, and transaction readiness that drives lasting growth — through Traction facilitation, long-term strategic planning, and M&amp;A advisory.</p>
-      <a href="https://adaliaadvisors.com" class="btn" target="_blank" rel="noopener">Visit Adalia Advisors</a>
-    </div>
-    <div class="advisors-logo">
-      <img src="img/aa-words.png" alt="Adalia Advisors">
-    </div>
-  </div>
-</section>
+        <section class="ventures" id="ventures">
+            <div class="ventures-header">
+                <span class="section-label">Ventures</span>
+                <h2>Other things we're building.</h2>
+            </div>
+            <div class="ventures-grid">
+                <div class="venture-card">
+                    <h3>Second Year Seniors</h3>
+                    <a
+                        href="https://secondyearseniors.com"
+                        class="venture-url"
+                        target="_blank"
+                        rel="noopener"
+                        >secondyearseniors.com ↗</a
+                    >
+                    <p>
+                        Colleges are running out of students. The country is
+                        running out of room to grow old well. Second Year
+                        Seniors makes the case that these two crises are
+                        actually each other's solution — and that struggling
+                        campuses should be reborn as communities for the Peak 65
+                        generation. Everyone deserves a senior year.
+                    </p>
+                    <a
+                        href="https://secondyearseniors.com"
+                        class="btn btn-outline"
+                        target="_blank"
+                        rel="noopener"
+                        >Read the Idea</a
+                    >
+                </div>
 
-<section class="ventures" id="ventures">
-  <div class="ventures-header">
-    <span class="section-label">Ventures</span>
-    <h2>Other things we're building.</h2>
-  </div>
-  <div class="ventures-grid">
+                <div class="venture-card">
+                    <h3>Doors</h3>
+                    <a
+                        href="https://doors.adaliaworks.com"
+                        class="venture-url"
+                        target="_blank"
+                        rel="noopener"
+                        >doors.adaliaworks.com ↗</a
+                    >
+                    <p>
+                        A simple web app that pulls data from the Guilford
+                        County, NC GIS for demographic research.
+                    </p>
+                    <a
+                        href="https://doors.adaliaworks.com"
+                        class="btn btn-outline"
+                        target="_blank"
+                        rel="noopener"
+                        >Open Doors</a
+                    >
+                </div>
 
-    <div class="venture-card">
-      <h3>Second Year Seniors</h3>
-      <a href="https://secondyearseniors.com" class="venture-url" target="_blank" rel="noopener">secondyearseniors.com ↗</a>
-      <p>Colleges are running out of students. The country is running out of room to grow old well. Second Year Seniors makes the case that these two crises are actually each other's solution — and that struggling campuses should be reborn as communities for the Peak 65 generation. Everyone deserves a senior year.</p>
-      <a href="https://secondyearseniors.com" class="btn btn-outline" target="_blank" rel="noopener">Read the Idea</a>
-    </div>
+                <div class="venture-card">
+                    <h3>Longevity Fitness Tracker</h3>
+                    <a href="fitness-tracker-overview.html" class="venture-url"
+                        >adaliaworks.com ↗</a
+                    >
+                    <p>
+                        A lean, web-based fitness tracker built for the long
+                        game — charting weightlifting goals and logging Zone 2
+                        cardio for adults pursuing the longevity-focused
+                        training principles popularized by Peter Attia and
+                        similar voices in the field.
+                    </p>
+                    <a
+                        href="fitness-tracker-overview.html"
+                        class="btn btn-outline"
+                        >Learn More</a
+                    >
+                </div>
+            </div>
+        </section>
 
-    <div class="venture-card">
-      <h3>Doors</h3>
-      <a href="https://doors.adaliaworks.com" class="venture-url" target="_blank" rel="noopener">doors.adaliaworks.com ↗</a>
-      <p>A simple web app that pulls data from the Guilford County, NC GIS for demographic research.</p>
-      <a href="https://doors.adaliaworks.com" class="btn btn-outline" target="_blank" rel="noopener">Open Doors</a>
-    </div>
-
-    <div class="venture-card">
-      <h3>Longevity Fitness Tracker</h3>
-      <a href="fitness-tracker-overview.html" class="venture-url">adaliaworks.com ↗</a>
-      <p>A lean, web-based fitness tracker built for the long game — charting weightlifting goals and logging Zone 2 cardio for adults pursuing the longevity-focused training principles popularized by Peter Attia and similar voices in the field.</p>
-      <a href="fitness-tracker-overview.html" class="btn btn-outline">Learn More</a>
-    </div>
-
-  </div>
-</section>
-
-<footer>
-  <a href="#top" aria-label="Adalia Works — home">
-    <img src="img/aw-logo.png" alt="Adalia Works">
-  </a>
-  <p>&copy; 2026 Adalia Works. All rights reserved.</p>
-</footer>
-
-</body>
+        <footer>
+            <a href="#top" aria-label="Adalia Works — home">
+                <img src="img/aw-logo.png" alt="Adalia Works" />
+            </a>
+            <p>&copy; 2026 Adalia Works. All rights reserved.</p>
+        </footer>
+    </body>
 </html>
