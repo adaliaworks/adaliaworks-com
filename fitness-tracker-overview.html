@@ -162,6 +162,20 @@
     font-size: 13px;
     text-align: center;
   }
+  .footer-tm {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 10px;
+    line-height: 1.6;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tm {
+    font-size: 0.6em;
+    vertical-align: super;
+    line-height: 0;
+  }
 
   @media (max-width: 860px) {
     .grid-2 { grid-template-columns: 1fr; }
@@ -175,7 +189,7 @@
 
 <div class="hero">
   <div class="hero-inner">
-    <span class="section-label">Adalia Works · Venture in Progress</span>
+    <span class="section-label">Adalia Works<span class="tm">™</span> · Venture in Progress</span>
     <h1>A simple <span>fitness tracker</span> built for the long game</h1>
     <p>A lean, web-based MVP for charting weightlifting goals and logging Zone&nbsp;2 cardio — designed for adults pursuing the longevity-focused training principles popularized by Peter Attia and similar voices in the field.</p>
   </div>
@@ -378,7 +392,10 @@
 </section>
 
 <footer>
-  © 2026 Adalia Works — Project overview, subject to change as the MVP evolves through user testing.
+  © 2026 Adalia Works<span class="tm">™</span> — Project overview, subject to change as the MVP evolves through user testing.
+  <div class="footer-tm">
+    Adalia<span class="tm">™</span>, Adalia Works<span class="tm">™</span>, Adalia Advisors<span class="tm">™</span>, Adalia Ventures<span class="tm">™</span>, and related marks are trademarks of TLHG Ventures LLC.
+  </div>
 </footer>
 
 </body>
