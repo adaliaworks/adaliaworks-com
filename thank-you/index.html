@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You | Adalia Works</title>
+<meta name="robots" content="noindex">
+<link rel="icon" type="image/x-icon" href="/img/aw-favicon.ico" />
+<link rel="icon" type="image/png" href="/img/aw-logo.png" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --carolina: #4B9CD3;
+    --royal: #1A3FA3;
+    --navy: #163265;
+    --white: #ffffff;
+    --off-white: #f7f8fc;
+    --light-gray: #edf0f7;
+    --text: #1a1f36;
+    --text-muted: #5a6380;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 100px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  main::before {
+    content: '';
+    position: absolute;
+    top: -120px; right: -80px;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(75,156,211,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .inner {
+    max-width: 640px;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+  }
+
+  .brand-logo {
+    display: inline-block;
+    margin-bottom: 36px;
+  }
+  .brand-logo img {
+    height: 56px;
+    width: auto;
+    display: block;
+  }
+
+  .section-label {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--carolina);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  h1 span { color: var(--carolina); }
+
+  main p {
+    font-size: 18px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.72);
+    font-weight: 300;
+    margin: 0 auto 40px;
+    max-width: 520px;
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--carolina);
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    padding: 15px 34px;
+    border-radius: 6px;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--white);
+    transform: translateY(-1px);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--white);
+    outline-offset: 3px;
+  }
+
+  footer {
+    padding: 48px 60px;
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    font-size: 13px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .footer-tm {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    margin-top: 10px;
+    line-height: 1.6;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .tm {
+    font-size: 0.6em;
+    vertical-align: super;
+    line-height: 0;
+  }
+
+  @media (max-width: 860px) {
+    main { padding-left: 28px; padding-right: 28px; }
+    footer { padding-left: 28px; padding-right: 28px; }
+  }
+</style>
+<script data-goatcounter="https://stats.adaliaworks.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+<main>
+  <div class="inner">
+    <a href="/" class="brand-logo" aria-label="Adalia Works — home">
+      <img src="/img/aw-logo.png" alt="Adalia Works" />
+    </a>
+    <span class="section-label">Message Received</span>
+    <h1>Thank you for <span>reaching out.</span></h1>
+    <p>Your message is in. We read everything that comes through and will get back to you as soon as we can.</p>
+    <a href="/" class="btn">Back to Adalia Works</a>
+  </div>
+</main>
+
+<footer>
+  &copy; 2026 Adalia Works<span class="tm">™</span>. All rights reserved.
+  <div class="footer-tm">
+    Adalia<span class="tm">™</span>, Adalia Works<span class="tm">™</span>, Adalia Advisors<span class="tm">™</span>, Adalia Ventures<span class="tm">™</span>, and related marks are trademarks of TLHG Ventures LLC.
+  </div>
+</footer>
+
+</body>
+</html>
