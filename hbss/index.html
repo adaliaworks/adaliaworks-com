@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Healthy Boards, Successful Schools — Board Prep</title>
+<style>
+  :root{
+    --ink:#10233F;
+    --ink-2:#1C3557;
+    --paper:#FCFBF8;
+    --wash:#EFECE4;
+    --rule:#C6BEAE;
+    --seal:#8A2B2B;
+    --brass:#A8813C;
+    --slate:#5B6A79;
+    --display:Georgia,"Iowan Old Style","Palatino Linotype",Palatino,serif;
+    --utility:"Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--ink);
+    color:var(--paper);
+    font-family:var(--display);
+    -webkit-font-smoothing:antialiased;
+    min-height:100vh;
+  }
+  .shell{max-width:640px;margin:0 auto;padding:0 18px 64px}
+
+  /* ---------- masthead ---------- */
+  .masthead{padding:26px 0 18px;border-bottom:1px solid rgba(198,190,174,.28)}
+  .masthead h1{
+    font-size:19px;line-height:1.25;margin:0;font-weight:400;
+    letter-spacing:.055em;text-transform:uppercase;
+  }
+  .masthead .sub{
+    margin-top:7px;font-family:var(--utility);font-size:10.5px;
+    letter-spacing:.14em;text-transform:uppercase;color:rgba(252,251,248,.55);
+  }
+  .countdown{
+    margin-top:14px;display:flex;align-items:baseline;gap:9px;
+    font-family:var(--utility);font-size:10.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--brass);
+  }
+  .countdown b{font-family:var(--display);font-size:26px;letter-spacing:0;font-weight:400;line-height:1}
+
+  /* ---------- deck filter ---------- */
+  .filters{display:flex;flex-wrap:wrap;gap:6px;padding:16px 0 4px}
+  .chip{
+    font-family:var(--utility);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    padding:6px 10px;border:1px solid rgba(198,190,174,.35);background:transparent;
+    color:rgba(252,251,248,.6);cursor:pointer;border-radius:2px;
+  }
+  .chip[aria-pressed="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .chip:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+  /* ---------- card ---------- */
+  .card{
+    background:var(--paper);color:var(--ink);
+    margin-top:18px;padding:26px 22px 22px;border-radius:3px;
+    box-shadow:0 18px 40px rgba(0,0,0,.32);
+    min-height:300px;display:flex;flex-direction:column;
+  }
+  .eyebrow{
+    font-family:var(--utility);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--slate);display:flex;justify-content:space-between;gap:12px;
+  }
+  .eyebrow .src{color:var(--brass)}
+  .q{font-size:21px;line-height:1.42;margin:16px 0 0}
+  .leader{
+    height:14px;margin:20px 0 4px;
+    background-image:radial-gradient(circle,var(--rule) 1.1px,transparent 1.2px);
+    background-size:7px 14px;background-position:left center;background-repeat:repeat-x;
+  }
+  .a{font-size:16.5px;line-height:1.58;margin:12px 0 0;color:var(--ink-2)}
+  .a .tail{display:block;margin-top:12px;font-family:var(--utility);font-size:11px;
+    letter-spacing:.05em;color:var(--slate)}
+  .a.placeholder{color:var(--slate);font-style:italic}
+  .mine{margin:16px 0 0;padding:14px 14px 12px;background:var(--wash);border-left:2px solid var(--brass);
+    font-size:16px;line-height:1.55;color:var(--ink-2);border-radius:2px}
+  .minelabel{display:block;font-family:var(--utility);font-size:9.5px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--brass);margin-bottom:7px}
+  .editor{margin-top:16px}
+  .editor textarea{
+    width:100%;min-height:150px;padding:12px;border:1px solid var(--rule);border-radius:2px;
+    background:#fff;color:var(--ink);font-family:var(--display);font-size:16px;line-height:1.55;resize:vertical;
+  }
+  .editor textarea:focus{outline:2px solid var(--brass);outline-offset:1px}
+  .editor .hint{font-family:var(--utility);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--slate);margin:0 0 7px}
+  .addlink{
+    background:none;border:none;padding:0;margin-top:14px;cursor:pointer;align-self:flex-start;
+    font-family:var(--utility);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--brass);text-decoration:underline;text-underline-offset:3px;
+  }
+  .addlink:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+  .spacer{flex:1}
+  .share{margin-top:22px;background:var(--paper);color:var(--ink);padding:20px 18px;border-radius:3px}
+  .share h4{font-family:var(--utility);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    margin:0 0 8px;color:var(--slate);font-weight:400}
+  .share p{font-size:14px;line-height:1.5;margin:0 0 10px;color:var(--ink-2)}
+  .share textarea{width:100%;min-height:120px;padding:10px;border:1px solid var(--rule);border-radius:2px;
+    font-family:var(--utility);font-size:12px;line-height:1.45;background:#fff;color:var(--ink);resize:vertical}
+  .share .controls{margin-top:12px}
+  .hidden{display:none}
+  .reveal{animation:rise .22s ease-out}
+  @keyframes rise{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.reveal{animation:none}}
+
+  /* ---------- controls ---------- */
+  .controls{display:flex;gap:8px;margin-top:22px}
+  .btn{
+    flex:1;font-family:var(--utility);font-size:11px;letter-spacing:.12em;text-transform:uppercase;
+    padding:14px 6px;border:1px solid var(--rule);background:transparent;color:var(--ink);
+    cursor:pointer;border-radius:2px;
+  }
+  .btn:active{transform:translateY(1px)}
+  .btn:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+  .btn.wide{flex:1 1 100%;background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .btn.again{color:var(--seal);border-color:rgba(138,43,43,.4)}
+  .btn.solid{color:var(--brass);border-color:rgba(168,129,60,.45)}
+  .kbd{display:block;margin-top:5px;font-size:9px;letter-spacing:.08em;color:var(--slate)}
+
+  /* ---------- empty / done ---------- */
+  .done{background:var(--paper);color:var(--ink);margin-top:18px;padding:34px 22px;border-radius:3px}
+  .done h2{font-size:20px;font-weight:400;margin:0 0 10px}
+  .done p{font-size:15.5px;line-height:1.55;margin:0 0 14px;color:var(--ink-2)}
+
+  /* ---------- progress ledger ---------- */
+  .ledger{margin-top:34px}
+  .ledger h3{
+    font-family:var(--utility);font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    color:rgba(252,251,248,.5);margin:0 0 14px;font-weight:400;
+  }
+  .row{display:flex;align-items:baseline;gap:8px;padding:7px 0;font-size:14.5px}
+  .row .name{white-space:nowrap;color:rgba(252,251,248,.92)}
+  .row .dots{
+    flex:1;height:12px;position:relative;top:-3px;
+    background-image:radial-gradient(circle,rgba(198,190,174,.32) 1.1px,transparent 1.2px);
+    background-size:7px 12px;background-position:left center;background-repeat:repeat-x;
+  }
+  .row .dots span{
+    position:absolute;left:0;top:0;bottom:0;
+    background-image:radial-gradient(circle,var(--brass) 1.3px,transparent 1.4px);
+    background-size:7px 12px;background-position:left center;background-repeat:repeat-x;
+  }
+  .row .num{font-family:var(--utility);font-size:11px;color:rgba(252,251,248,.6);letter-spacing:.06em}
+
+  .foot{margin-top:30px;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .link{
+    background:none;border:none;padding:0;cursor:pointer;
+    font-family:var(--utility);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(252,251,248,.45);text-decoration:underline;text-underline-offset:3px;
+  }
+  .link:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+  .note{margin-top:26px;font-size:12.5px;line-height:1.6;color:rgba(252,251,248,.45)}
+  .status{font-family:var(--utility);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+    color:rgba(252,251,248,.4);margin-top:12px;min-height:14px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <header class="masthead">
+    <h1>Healthy Boards &middot; Successful Schools</h1>
+    <div class="sub">William R. Mott, Ph.D. &nbsp;/&nbsp; Updated Edition &nbsp;/&nbsp; Prep Deck</div>
+    <div class="countdown"><b id="days">—</b><span id="daysLabel">days until Fri, Sep 11</span></div>
+  </header>
+
+  <div class="filters" id="filters" role="group" aria-label="Decks"></div>
+
+  <main id="stage"></main>
+  <div class="status" id="status"></div>
+
+  <section class="ledger">
+    <h3>Where you stand</h3>
+    <div id="ledger"></div>
+  </section>
+
+  <div class="foot">
+    <button class="link" id="more">Pull 10 more cards</button>
+    <button class="link" id="shareBtn">Share your answers</button>
+    <button class="link" id="reset">Reset all progress</button>
+  </div>
+
+  <section class="share hidden" id="share">
+    <h4>Answers you've written</h4>
+    <p>Copy this out to send your filled-in answers to someone else's copy of the deck. Or paste
+      someone's block in and press Merge — it adds their answers to yours and overwrites where both
+      of you wrote on the same card. Review schedules stay personal and aren't included.</p>
+    <textarea id="shareBox" spellcheck="false" aria-label="Answer data"></textarea>
+    <div class="controls">
+      <button class="btn" id="mergeBtn">Merge pasted answers</button>
+      <button class="btn" id="closeShare">Close</button>
+    </div>
+  </section>
+
+  <p class="note">
+    Chapter titles, case stories, page references, and the ideas summarized on these cards are drawn
+    from <em>Healthy Boards – Successful Schools: The Impact of Governance and Leadership on
+    Independent and Faith-Based Schools</em>, Updated Edition (Fitting Words, 2026), &copy; William R.
+    Mott, Ph.D. This is an unofficial study aid, not affiliated with or endorsed by the author or
+    publisher, and no substitute for reading the book.
+  </p>
+
+  <p class="note">
+    Each card is marked with where its answer came from. <em>From the book</em> — the printed
+    contents, author's note, and cover. <em>Verified online</em> — the author's and publisher's own
+    current pages. <em>From the contents</em> — the contents summaries rather than the chapter text,
+    so it reflects the direction of the argument, not the author's exact wording.
+    <em>Not yet known</em> — the Gaps deck: points the contents names but doesn't spell out. Reveal
+    one, read the page it cites, and write the answer in. It becomes the back of that card from then
+    on, and the card keeps its place in the rotation.
+  </p>
+</div>
+
+<script>
+/* ============================================================
+   CARD DATA
+   src: book | web | inferred | gap
+   ============================================================ */
+const DECKS = {
+  frame:  "Frame",
+  stance: "Positions",
+  chap:   "Chapters",
+  cs:     "Case stories",
+  num:    "Numbered lists",
+  apx:    "Appendices",
+  gap:    "Gaps"
+};
+
+const CARDS = [
+/* ---------- FRAME ---------- */
+{id:"f1",d:"frame",s:"book",q:"Full title and subtitle?",
+ a:"Healthy Boards – Successful Schools: The Impact of Governance and Leadership on Independent and Faith-Based Schools. The copy you have is the Updated Edition."},
+{id:"f2",d:"frame",s:"web",q:"Publisher, date, length?",
+ a:"Fitting Words. Updated edition dated February 1, 2026. 368 pages, 6×9, $24.99 list."},
+{id:"f3",d:"frame",s:"web",q:"What's new in the updated edition?",
+ a:"Mott calls it a major revision — his fourth book on governance. It adds new case stories, additional chapters, new appendices, an improved bylaws template, and a new treatment of governance in schools tied to a church or denomination."},
+{id:"f4",d:"frame",s:"web",q:"Mott's own track record?",
+ a:"Head of school at six independent and faith-based schools, three of them as interim head. Trustee at several schools and other nonprofits. Consultant for over a decade on governance, fundraising, strategic planning, and leadership searches.<span class='tail'>Ph.D. in educational leadership, Peabody College at Vanderbilt; M.L.S. Vanderbilt; B.A. Ole Miss.</span>"},
+{id:"f5",d:"frame",s:"web",q:"Where is the book used as a text?",
+ a:"The master's programs in independent school leadership at Vanderbilt (Peabody) and at Mercer. Mott has taught governance modules at Vanderbilt as an adjunct and served on the faculty of the Peabody Leadership Institute for Independent Schools."},
+{id:"f6",d:"frame",s:"web",q:"His earlier books?",
+ a:"The Board Game (2012) and Super Boards (2014). Healthy Boards, Successful Schools was the third; the updated edition is counted as his fourth."},
+{id:"f7",d:"frame",s:"book",q:"Who wrote the foreword, and why does that matter?",
+ a:"Jeff Jackson, MBA, Ed.D., president of the Georgia Independent School Association (GISA). It signals where the book sits — state and regional independent-school association circles, not NAIS-only."},
+{id:"f8",d:"frame",s:"book",q:"What does the Author's Note establish?",
+ a:"Terminology. Schools use varied names for both, so throughout the book he standardizes on <em>board of trustees</em> for the governing board and <em>head of school</em> for the school's CEO.<span class='tail'>Useful tell: if he uses those two terms in the room, he's speaking from the book's frame.</span>"},
+{id:"f9",d:"frame",s:"book",q:"How is the book structured?",
+ a:"26 chapters, each followed by one or more of 26 numbered Case Stories, plus a prologue, an introduction, an epilogue, and eleven appendices (A–K).<span class='tail'>The case stories are the facilitation currency — they're written as realistic fiction and designed to be worked through by a board together.</span>"},
+{id:"f10",d:"frame",s:"book",q:"Prologue and introduction titles?",
+ a:"Prologue: “A Story About Making a Difference and Deciding Which Stonecutter You Will Be” (p. xxix). Introduction: “Inspired Leadership and the Spirit of Collaboration” (p. 1)."},
+{id:"f11",d:"frame",s:"book",q:"How does the book close?",
+ a:"Epilogue: “Independent and Faith-Based Schools Are Vital to Our Future” (p. 269), then the appendices, acknowledgments (329), About the Author (333), and a closing “Help for Your Governance Challenges” page (335)."},
+{id:"f12",d:"frame",s:"web",q:"The five things the publisher says the book equips schools to do?",
+ a:"Show that a healthy board is what separates thriving from merely surviving; elevate the committee on trustees' mission to recruit, retain, educate, and evaluate; solidify how board members relate to each other and to school leadership; make board service a serious but joyful experience; and honor unity — one board, one voice."},
+
+/* ---------- POSITIONS ---------- */
+{id:"p1",d:"stance",s:"web",q:"The book's central claim in one sentence?",
+ a:"The relationship among the head of school, the board chair, and the trustees is the single biggest contributor to a school's success and viability — healthy board, successful school."},
+{id:"p2",d:"stance",s:"book",q:"The unity slogan, and where it comes from?",
+ a:"One Board — One Voice — One Vision. It's the subtitle of Chapter One (p. 5) and the through-line of the whole book."},
+{id:"p3",d:"stance",s:"book",q:"How many employees does the governing board have?",
+ a:"One — the head of school. It's Appendix K's #5 issue and the principle behind Case Story 14: the chair and other trustees don't hold a direct line to administrative staff."},
+{id:"p4",d:"stance",s:"book",q:"Mott's position on executive sessions?",
+ a:"Unusually blunt, and it's the whole point of Chapter Sixteen: executive sessions are “out of step with best practices,” damaging, and lead to an atmosphere of distrust. The exception is evaluating and compensating the head. Otherwise the board should be building solidarity and partnership."},
+{id:"p5",d:"stance",s:"book",q:"Three problems when a board chair goes to staff about the head?",
+ a:"One, the chair should never go to a staff member to find out anything about the head. Two, the chair as an individual has no authority when communicating with staff. Three, doing it demonstrates a complete lack of support and trust for the head.<span class='tail'>Case Story 15, p. 161 — one of the cleanest three-part answers in the book.</span>"},
+{id:"p6",d:"stance",s:"book",q:"Fundraising and trustees?",
+ a:"It's not merely a necessity — it's a fundamental responsibility and therefore a priority for every board member. He calls it the task most often misunderstood or neglected during recruitment (Ch. 12), and it's #4 in Appendix K."},
+{id:"p7",d:"stance",s:"book",q:"Why do volunteer boards exist at all?",
+ a:"They're required by both state and federal law, and so they play a central role in the school's ability to achieve its mission and vision (Ch. 2). He treats “volunteer” as a description of the labor, not a lowered standard."},
+{id:"p8",d:"stance",s:"book",q:"A trustee moves their children to another school. What's the expectation?",
+ a:"That they step down. The logic: a trustee is closest to the inner workings, so the move signals to other parents that something is wrong, starts a guessing game, and becomes a distraction. Case Story 19 (p. 195) turns on a trustee who refuses."},
+{id:"p9",d:"stance",s:"book",q:"The committee on trustees' mandate?",
+ a:"Recruit, retain, educate, and evaluate the board. Mott calls these transformational responsibilities and gives the committee its own chapter (Ch. 5, p. 41). Recruiting the best members is a joint responsibility of that committee, all board members, and the school's staff (Ch. 3)."},
+{id:"p10",d:"stance",s:"book",q:"Where should a trustee recruitment conversation happen?",
+ a:"Somewhere that matches the seriousness of what's at stake. His counter-example in Case Story 3: someone's front yard while you're admiring her flowers is not the venue that yields the best candidate. Recruitment is intentional and thoughtful, not opportunistic."},
+{id:"p11",d:"stance",s:"book",q:"Why isn't business experience enough for the finance committee?",
+ a:"Being a good businessman or businesswoman doesn't mean you understand school finance or how a school budget is built. He also flags trustees assuming what applies at one school automatically applies at another.<span class='tail'>Case Story 1, p. 18 — and note he pairs school finance with financial assistance, which recurs in Case Story 12.</span>"},
+{id:"p12",d:"stance",s:"book",q:"His fix for boards stuck in operational weeds?",
+ a:"An annual board calendar, or Annual Meeting Agenda. Boards meeting nine or ten times a year tend to stomp through operational weeds; mapping the year's work in advance keeps meetings strategic. Case Story 13, p. 142."},
+{id:"p13",d:"stance",s:"book",q:"What defines a board's culture?",
+ a:"How and why a board carries out its responsibilities, and the manner in which it does — behavior, attitude, beliefs, philosophy, traditions, and the way the board and head work together (Ch. 9, p. 91)."},
+{id:"p14",d:"stance",s:"book",q:"What is the Covenant Agreement?",
+ a:"A document trustees sign that establishes an agreement — a covenant — between and among the board and the school. Mott's argument is that the act of signing adds authenticity to fundamental principles. Chapter 21 (p. 205); a sample sits in Appendix H (p. 297)."},
+{id:"p15",d:"stance",s:"book",q:"The board chair / head reporting relationship?",
+ a:"The head reports directly to the chair, which makes their ability to connect in a trusting, supportive, collaborative partnership critical. He calls the head–chair–board relationship the most crucial factor in determining a school's success (Ch. 8, p. 69)."},
+{id:"p16",d:"stance",s:"book",q:"Partnership or hierarchy?",
+ a:"Partnership — it's the #1 item in Appendix K, framed as more important than what's on the organizational chart."},
+{id:"p17",d:"stance",s:"book",q:"Why is a board chair transition a risk point?",
+ a:"A new chair often brings a different set of expectations than the previous one, and those shifting expectations land on the head. He calls it a defining moment for a school trying to reach a new level of maturity (Case Story 4), and Case Story 21 follows it as far as a head being terminated."},
+{id:"p18",d:"stance",s:"book",q:"What does he say about advisory boards?",
+ a:"Not a formal part of the governance structure, but useful — beneficial to the school and an observable training ground for prospective trustees. The catch: the head has to devote real time to it. Twelve steps in Chapter 25 (p. 237)."},
+{id:"p19",d:"stance",s:"book",q:"Do best practices guarantee good behavior?",
+ a:"No, and he says so directly. Case Story 18 (p. 184): boards can sit through education, workshops, and an expert-led retreat and still intentionally choose to ignore what they know to be best practice. The open question he poses is whether there's any recourse."},
+{id:"p20",d:"stance",s:"web",q:"His line on culture versus strategy?",
+ a:"He endorses “culture eats strategy for breakfast,” and defines leadership as the ability to influence culture for good. Board culture, in his framing, rests on trust, respect, collaboration, unity, and a willingness to embrace best practice."},
+{id:"p21",d:"stance",s:"web",q:"What separates an inspiring leader from the rest?",
+ a:"The ability to articulate a vision, connect it to a timetable, and communicate the financial consequences of realizing it. All three, not just the vision.<span class='tail'>From his own recent writing — a good line to have ready.</span>"},
+{id:"p22",d:"stance",s:"book",q:"Head of school searches — what does he emphasize?",
+ a:"No board responsibility is more important than finding the right fit. It calls for a series of strategic steps, and engaging a search firm — or at minimum learning what the process involves — is what lets a board complete the task. He flags the internal candidate scenario as a specific hazard (Case Story 2)."},
+{id:"p23",d:"stance",s:"book",q:"The board's role in student discipline — how does he frame the question?",
+ a:"As a question that surfaces again and again: is the board a court of appeal, or is discipline ultimately the head's responsibility? Should the board be involved at all, and can it overturn the head? Case Story 8 (undermining the head) shows the failure mode — the board giving a parent an audience after the head has already acted.<span class='tail'>Read p. 66 for his actual answer before you're in the room.</span>"},
+{id:"p24",d:"stance",s:"book",q:"Board evaluation — his view?",
+ a:"Essential, and widely skipped. Many boards fail to take evaluating their own work and impact seriously. His instrument is raising questions — Appendix I is a full set of them (Ch. 17, p. 171)."},
+{id:"p25",d:"stance",s:"web",q:"His read on faith-based governance structures?",
+ a:"Some faith-based schools are governed independently, with self-perpetuating boards and no church oversight. Others are tied to a church or denomination, either under a single 501(c)(3) covering both, or as two separate nonprofits. Structure shapes trustee eligibility and how authority flows — but he lands on leadership, not structure, as what determines success. New chapter in this edition (Ch. 26, p. 257)."},
+
+/* ---------- CHAPTERS ---------- */
+{id:"c1",d:"chap",s:"book",q:"Chapters 1–2 cover what?",
+ a:"1. Healthy Boards, Successful Schools: One Board—One Voice—One Vision (p. 5). 2. Volunteer Boards—Volunteer Leaders (p. 21)."},
+{id:"c2",d:"chap",s:"book",q:"Chapters 3–5 — the intake pipeline?",
+ a:"3. Trustee Recruitment: Creating a Process for Success (27). 4. Board Member Training and Orientation (33). 5. Establishing the Vital Role of the Committee on Trustees (41)."},
+{id:"c3",d:"chap",s:"book",q:"Chapters 6–7?",
+ a:"6. Determining Responsibilities and Priorities of the Board (49) — the eleven responsibilities. 7. Creating the Template for Effective Strategic Planning (57)."},
+{id:"c4",d:"chap",s:"book",q:"Chapters 8–10 — the leadership block?",
+ a:"8. The Role of the Board Chair in Providing Leadership (69). 9. Defining the Culture of the Board: What Should Be Valued and Why (91). 10. Board Success: Characteristics and Skills Necessary (109)."},
+{id:"c5",d:"chap",s:"book",q:"Chapters 11–12?",
+ a:"11. Creating the Structure for Board Success (117) — bylaws and policy. 12. Boards and Fundraising: Financially Committing to the School's Future (129)."},
+{id:"c6",d:"chap",s:"book",q:"Chapters 13–14?",
+ a:"13. The Board's Role in Planned Giving (137). 14. Appropriate and Meaningful Support: The Board's Role in the Enrollment Management Process (145) — the board as ambassador for admissions and marketing."},
+{id:"c7",d:"chap",s:"book",q:"Chapters 15–17?",
+ a:"15. The Connection Between Supportive Boards and Successful Schools (157) — is there a link between school growth and a high-functioning board? 16. Executive Sessions: Out of Step with Best Practices (165). 17. Board Evaluation: Key Components in Sustaining Excellence (171)."},
+{id:"c8",d:"chap",s:"book",q:"Chapters 18–20?",
+ a:"18. Surviving Versus Thriving: Why Some Boards Struggle Where Others Succeed (179). 19. Addressing the Issue of Ineffective or Difficult Board Members (187). 20. Board Values That Matter Most (199) — the Governance Promise."},
+{id:"c9",d:"chap",s:"book",q:"Chapters 21–23?",
+ a:"21. The Covenant Agreement: Signing Off on Fundamental Principles (205). 22. The Role of the Head of School (211). 23. Evaluating the Head: Developing a Supportive and Encouraging Process (219)."},
+{id:"c10",d:"chap",s:"book",q:"Chapters 24–26?",
+ a:"24. The Role of the Director of Advancement / Chief Development Officer (229). 25. Creating and Sustaining the Advisory Board: Twelve Steps to a Meaningful Program (237). 26. Navigating the School and Church Relationship (257)."},
+{id:"c11",d:"chap",s:"book",q:"Which chapter would you turn to for bylaws and board structure?",
+ a:"Chapter 11, Creating the Structure for Board Success (p. 117) — the argument that structure lives in the language of the bylaws and policies. Then Appendices A, B, and C for topics, revision process, and the sample bylaws."},
+{id:"c12",d:"chap",s:"book",q:"Which chapter treats the head of school's own job, from the inside?",
+ a:"Chapter 22, The Role of the Head of School (p. 211) — complex, many moving parts, enormous responsibility, and his claim that unless you've been a head it's hard to understand accurately what the person experiences."},
+
+/* ---------- CASE STORIES ---------- */
+{id:"cs1",d:"cs",s:"book",q:"Case Story 1?",
+ a:"What does the finance committee understand about school finance or financial assistance? (p. 18) — how standing committees get selected and what's wrongly assumed about their expertise."},
+{id:"cs2",d:"cs",s:"book",q:"Case Story 2?",
+ a:"Demonstrating respect for school leadership (p. 24) — a head of school search, and what happens when it includes a well-respected internal candidate."},
+{id:"cs3",d:"cs",s:"book",q:"Case Story 3?",
+ a:"“We have an opening on our board…” (p. 31) — recruiting in the wrong setting; the front-yard-flowers conversation."},
+{id:"cs4",d:"cs",s:"book",q:"Case Story 4?",
+ a:"Shifting expectations (p. 38) — one board chair hands off to the next, with a different set of expectations, and the head absorbs the difference."},
+{id:"cs5",d:"cs",s:"book",q:"Case Story 5?",
+ a:"When discussion is mandatory (p. 47) — a trustee who intimidates to get his way, an unconsidered opportunity arriving mid-stream, and the question of when a board may vote by email."},
+{id:"cs6",d:"cs",s:"book",q:"Case Story 6?",
+ a:"Governing by intimidation (p. 55) — Walt and Phil are told by a trustee that new trustees will treat leadership with suspicion and will “turn on you” if they don't measure up."},
+{id:"cs7",d:"cs",s:"book",q:"Case Story 7?",
+ a:"The board's role in student discipline (p. 66) — court of appeal or head's call, what limits apply, and whether the board can overturn the head."},
+{id:"cs8",d:"cs",s:"book",q:"Case Story 8?",
+ a:"Undermining the head of school (p. 88) — the board gives a parent an audience on a discipline matter the head has already acted on."},
+{id:"cs9",d:"cs",s:"book",q:"Case Story 9?",
+ a:"Supporting the new head of school (p. 100) — chair and search committee all leave right after the appointment, the board sees no need for a retreat, the new head follows a 30-year founding head, and then a trustee's spouse applies for a staff job."},
+{id:"cs10",d:"cs",s:"book",q:"Case Story 10?",
+ a:"The new board chair (p. 106) — a faculty member goes straight to the chair, and the chair, unsure of her role, responds in a way that challenges the head's authority."},
+{id:"cs11",d:"cs",s:"book",q:"Case Story 11?",
+ a:"The head's role in trustee selection (p. 115) — the best boards involve the head and listen to the head's read on prospects; collaboration produces the better list."},
+{id:"cs12",d:"cs",s:"book",q:"Case Story 12?",
+ a:"Financial assistance: what information is appropriate to share? (p. 125) — the board's role in aid policy, and what the finance committee should or shouldn't know about specific families. Policy question or overreach into operations?"},
+{id:"cs13",d:"cs",s:"book",q:"Case Story 13?",
+ a:"The value of adopting an annual board calendar (p. 142) — Tim works the annual meeting agenda idea through with the board chair."},
+{id:"cs14",d:"cs",s:"book",q:"Case Story 14?",
+ a:"Authority of the interim head (p. 150) — chair and administrative officer should have limited contact, filtered through the head, because the board has one employee. What happens when that breaks down."},
+{id:"cs15",d:"cs",s:"book",q:"Case Story 15?",
+ a:"When the board chair decides to communicate with the school's staff (p. 161) — the three critical issues that raises."},
+{id:"cs16",d:"cs",s:"book",q:"Case Story 16?",
+ a:"The importance of trust between the head and chair (p. 168) — at a retreat, the chair argues executive sessions do no harm where there's trust; the facilitator asks why the head isn't included, then."},
+{id:"cs17",d:"cs",s:"book",q:"Case Story 17?",
+ a:"The challenge of communication (p. 176) — changing the number of board meetings per year, and how to communicate a change like that. Presented as a model of both how to and how not to proceed."},
+{id:"cs18",d:"cs",s:"book",q:"Case Story 18?",
+ a:"Intentionally choosing to ignore best practices (p. 184) — trained, retreated, facilitated, and still behaving inconsistently with an effective board/head relationship. Is there any recourse?"},
+{id:"cs19",d:"cs",s:"book",q:"Case Story 19?",
+ a:"Where do your trustees' children attend school? (p. 195) — the trustee who enrolls elsewhere and refuses to step down."},
+{id:"cs20",d:"cs",s:"book",q:"Case Story 20?",
+ a:"A meaningful evaluation of the head (p. 202) — a chair arrives with very different criteria, and the question of one person holding two board offices at once."},
+{id:"cs21",d:"cs",s:"book",q:"Case Story 21?",
+ a:"Being on the same page during the board chair transition (p. 207) — ideology over what's best for the school; working across the chair who hired the head and the next chair can end in termination."},
+{id:"cs22",d:"cs",s:"book",q:"Case Story 22?",
+ a:"Being derailed by one issue (p. 215) — head and associate head for business ambushed at a retreat by a trustee and former head over accounts receivable. Institutional memory, candor, and trust."},
+{id:"cs23",d:"cs",s:"book",q:"Case Story 23?",
+ a:"“Aren't you here to do what we tell you?” (p. 224) — trustees convinced the head reports to the board and to each trustee individually, and must do what the board wants."},
+{id:"cs24",d:"cs",s:"book",q:"Case Story 24?",
+ a:"Trusting the process (p. 234) — the development committee chair working with the head and the chief development officer; trust, respect, and support as the conditions for results."},
+{id:"cs25",d:"cs",s:"book",q:"Case Story 25?",
+ a:"Demonstrating unwavering support for the head (p. 247) — how a chair and board make support tangible, since heads thrive when they believe they have it."},
+{id:"cs26",d:"cs",s:"book",q:"Case Story 26?",
+ a:"The role of the search committee in hiring the head of school (p. 249) — a committee takes a different path from proven practice and settles for a candidate despite alarms."},
+
+/* ---------- NUMBERED LISTS ---------- */
+{id:"n1",d:"num",s:"book",q:"Eleven of what, and where?",
+ a:"Eleven board responsibilities — Chapter 6, Determining Responsibilities and Priorities of the Board (p. 49). Some are mandated by the school's articles of incorporation and bylaws, and he argues they ultimately determine success and sustainability."},
+{id:"n2",d:"num",s:"book",q:"Seven of what, and where?",
+ a:"Seven key characteristics the committee on trustees should weigh before securing new board members — Chapter 10 (p. 109). They're what define the board's qualities, experience, and expertise."},
+{id:"n3",d:"num",s:"book",q:"Nine of what, and where?",
+ a:"At least nine traits shared by boards that lack self-awareness and can't sustain a strategic perspective — Chapter 18, Surviving Versus Thriving (p. 179)."},
+{id:"n4",d:"num",s:"book",q:"Six of what, and where?",
+ a:"Six statements that make up the Governance Promise — Chapter 20, Board Values That Matter Most (p. 199). They speak to attitude, behavior, and reflection about the board's work."},
+{id:"n5",d:"num",s:"book",q:"Twelve of what, and where?",
+ a:"Twelve steps to a meaningful advisory board program — Chapter 25 (p. 237)."},
+{id:"n6",d:"num",s:"book",q:"Ten of what, and where?",
+ a:"Two tens. Appendix J: the 10 factors for evaluating the head of school (p. 313). Appendix K: ten board best practice issues, counted down from ten to one (p. 315)."},
+{id:"n7",d:"num",s:"book",q:"Appendix K, issues ten through six?",
+ a:"10. Attitude is everything. 9. Finding balance from the board. 8. Board members with an agenda. 7. The value of consensus and teamwork. 6. The board leadership transition."},
+{id:"n8",d:"num",s:"book",q:"Appendix K, issues five through one?",
+ a:"5. The school's governing board has one employee. 4. Fundraising is fundamental. 3. Evaluation is the key to understanding where you have been and where you are headed. 2. The board chair and the head of school must connect. 1. Partnership is more important than hierarchy — more important than what's on the organizational chart."},
+{id:"n9",d:"num",s:"book",q:"Three critical issues raised when a chair communicates with staff?",
+ a:"The chair should never go to a staff member to find out anything about the head; the chair individually has no authority when communicating with staff; and the behavior itself demonstrates a complete lack of support and trust for the head."},
+{id:"n10",d:"num",s:"web",q:"Two structures for a church-affiliated school?",
+ a:"A single 501(c)(3) covering both school and church, or a separate 501(c)(3) for each entity. The difference is not cosmetic — it shapes trustee eligibility and selection, how authority flows, and how closely the school's culture tracks the church's."},
+
+/* ---------- APPENDICES ---------- */
+{id:"a1",d:"apx",s:"book",q:"Appendices A, B, C?",
+ a:"A: Suggested topics for bylaws (271). B: Revising the school's bylaws (273). C: Sample bylaws (275) — the template he improved for this edition."},
+{id:"a2",d:"apx",s:"book",q:"Appendix D?",
+ a:"Sample advancement committee charter, framed as a statement of responsibilities (287)."},
+{id:"a3",d:"apx",s:"book",q:"Appendices E and F?",
+ a:"E: Board orientation sample agenda (291). F: Sample board retreat agenda (293).<span class='tail'>F is the closest thing in the book to a script for a facilitated session.</span>"},
+{id:"a4",d:"apx",s:"book",q:"Appendix G?",
+ a:"The strategic plan action steps in the process (295)."},
+{id:"a5",d:"apx",s:"book",q:"Appendix H?",
+ a:"The covenant agreement sample (297) — the document Chapter 21 argues trustees should sign."},
+{id:"a6",d:"apx",s:"book",q:"Appendix I?",
+ a:"Evaluating the board: key questions to help boards sustain excellence (301). It's the longest appendix — twelve pages of questions."},
+{id:"a7",d:"apx",s:"book",q:"Appendix J?",
+ a:"The 10 factors for evaluating the head of school (313)."},
+{id:"a8",d:"apx",s:"book",q:"Which appendices would you photocopy for a board retreat?",
+ a:"F (retreat agenda) to see the shape of the day, I (board self-evaluation questions) as the working instrument, and H (covenant agreement) as the artifact a retreat often produces. E if new trustees are joining."},
+
+/* ---------- GAPS ---------- */
+{id:"g1",d:"gap",s:"gap",q:"Name the eleven board responsibilities. <em>(Ch. 6, p. 49)</em>",
+ a:"Read p. 49 and type them in. The contents gives the count and says some are mandated by the articles of incorporation and bylaws — not the list. This is the one a facilitator is most likely to walk a board through item by item."},
+{id:"g2",d:"gap",s:"gap",q:"Recite the six statements of the Governance Promise. <em>(Ch. 20, p. 199)</em>",
+ a:"Read p. 199 and type them in. They speak to attitude, behavior, and reflection about the board's work. If he asks a board to affirm something aloud, it will probably be these."},
+{id:"g3",d:"gap",s:"gap",q:"Name the nine traits shared by boards that struggle. <em>(Ch. 18, p. 179)</em>",
+ a:"Read p. 179 and type them in. The contents gives the framing — boards lacking self-awareness, unable to sustain a strategic perspective — but not the traits."},
+{id:"g4",d:"gap",s:"gap",q:"Name the seven characteristics to weigh before securing new board members. <em>(Ch. 10, p. 109)</em>",
+ a:"Read p. 109 and type them in. They're what define the board's qualities, experience, and expertise."},
+{id:"g5",d:"gap",s:"gap",q:"Name the 10 factors for evaluating the head of school. <em>(Appendix J, p. 313)</em>",
+ a:"Read p. 313 and type them in. One of the two instruments most likely to be handed out at a session."},
+{id:"g6",d:"gap",s:"gap",q:"What does Appendix I actually ask a board? <em>(p. 301)</em>",
+ a:"Read pp. 301–312 and note the shape of the questions — you don't need all of them, just the categories and the three or four sharpest. Twelve pages of self-evaluation questions."},
+{id:"g7",d:"gap",s:"gap",q:"What is his answer on the board's role in student discipline? <em>(p. 66)</em>",
+ a:"Read p. 66 and type it in. The contents only poses the questions: court of appeal or not, what limits apply, and whether the board can overturn the head."},
+{id:"g8",d:"gap",s:"gap",q:"What are the twelve steps to a meaningful advisory board program? <em>(Ch. 25, p. 237)</em>",
+ a:"Read p. 237 and type them in. The one place in the book he lays out a full operational sequence."},
+{id:"g9",d:"gap",s:"gap",q:"What's in the revised sample bylaws, and what changed? <em>(Appendix C, pp. 275–286)</em>",
+ a:"Skim pp. 271–286 — suggested topics, the revision process, then the template itself. He improved this template for the updated edition, so it's the piece most likely to differ from what a board is currently working off."}
+];
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const KEY = "hbss-prep-v2";
+const DAY = 86400000;
+const INTERVALS = [0,1,2,4,7,12];   // days by box (1..5 used)
+const NEW_PER_DAY = 15;
+const TARGET = new Date(2026,8,11); // Fri Sep 11, 2026
+
+let progress = {};   // id -> {box, due(ms), intro(dayIndex)}
+let notes    = {};   // id -> answer the reader wrote
+let active   = new Set(Object.keys(DECKS));
+let queue    = [];
+let current  = null;
+let revealed = false;
+let editing  = false;
+
+const todayKey = () => Math.floor(Date.now()/DAY);
+function setStatus(msg){ document.getElementById("status").textContent = msg || ""; }
+function esc(s){ return String(s).replace(/[&<>"]/g, c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function para(s){ return esc(s).replace(/\n/g,"<br>"); }
+
+/* Storage: prefer the host's per-user store. Outside it — a downloaded copy of
+   this file opened in a browser — fall back to that browser's own storage. */
+const HOST_STORE = (typeof window.storage === "object" && window.storage && typeof window.storage.get === "function");
+
+async function readStore(){
+  if(HOST_STORE){
+    try{ const r = await window.storage.get(KEY); return (r && r.value) ? r.value : null; }
+    catch(e){ return null; }
+  }
+  try{ return window.localStorage.getItem(KEY); }catch(e){ return null; }
+}
+async function writeStore(v){
+  if(HOST_STORE){
+    try{ await window.storage.set(KEY, v); return true; }catch(e){ return false; }
+  }
+  try{ window.localStorage.setItem(KEY, v); return true; }catch(e){ return false; }
+}
+async function clearStore(){
+  if(HOST_STORE){ try{ await window.storage.delete(KEY); }catch(e){} return; }
+  try{ window.localStorage.removeItem(KEY); }catch(e){}
+}
+
+async function load(){
+  const raw = await readStore();
+  if(!raw) return;
+  try{
+    const parsed = JSON.parse(raw);
+    progress = parsed.p || {};
+    notes    = parsed.n || {};
+  }catch(e){ progress = {}; notes = {}; }
+}
+let saveTimer=null;
+function save(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(async ()=>{
+    const ok = await writeStore(JSON.stringify({p:progress, n:notes}));
+    if(!ok) setStatus("Progress couldn't be saved this session");
+  },250);
+}
+
+/* ============================================================
+   QUEUE
+   ============================================================ */
+function pool(){ return CARDS.filter(c=>active.has(c.d)); }
+
+function buildQueue(extra){
+  const now = Date.now();
+  const seen = [], fresh = [];
+  pool().forEach(c=>{
+    const p = progress[c.id];
+    if(!p) fresh.push(c);
+    else if(p.due <= now) seen.push(c);
+  });
+  const introducedToday = Object.values(progress).filter(p=>p.intro===todayKey()).length;
+  const room = Math.max(0, (extra||NEW_PER_DAY) - (extra?0:introducedToday));
+  queue = seen.concat(fresh.slice(0, room));
+  shuffle(queue);
+}
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} }
+
+function grade(g){
+  if(!current) return;
+  const p = progress[current.id] || {box:0, intro:todayKey()};
+  if(g==="again")      p.box = 1;
+  else if(g==="good")  p.box = Math.min(5, (p.box||0)+1);
+  else                 p.box = Math.min(5, (p.box||0)+2);
+  p.due = Date.now() + INTERVALS[p.box]*DAY;
+  progress[current.id] = p;
+  save();
+  if(g==="again") queue.push(current);
+  next();
+}
+
+function next(){
+  revealed = false;
+  editing  = false;
+  current = queue.shift() || null;
+  render();
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+function renderCountdown(){
+  const d = Math.ceil((TARGET - Date.now())/DAY);
+  const el = document.getElementById("days");
+  const lb = document.getElementById("daysLabel");
+  if(d > 1){ el.textContent = d; lb.textContent = "days until Fri, Sep 11"; }
+  else if(d === 1){ el.textContent = "1"; lb.textContent = "day until Fri, Sep 11"; }
+  else if(d === 0){ el.textContent = "today"; lb.textContent = "board meeting"; }
+  else { el.textContent = "—"; lb.textContent = "keeping it fresh"; }
+}
+
+function renderFilters(){
+  const wrap = document.getElementById("filters");
+  wrap.innerHTML = "";
+  Object.entries(DECKS).forEach(([k,label])=>{
+    const b = document.createElement("button");
+    b.className = "chip";
+    b.textContent = label;
+    b.setAttribute("aria-pressed", active.has(k));
+    b.onclick = ()=>{
+      if(active.has(k)){ if(active.size>1) active.delete(k); }
+      else active.add(k);
+      renderFilters(); buildQueue(); next(); renderLedger();
+    };
+    wrap.appendChild(b);
+  });
+}
+
+function render(){
+  const stage = document.getElementById("stage");
+  if(!current){
+    const remaining = pool().filter(c=>!progress[c.id]).length;
+    stage.innerHTML =
+      '<div class="done"><h2>Nothing due right now.</h2>' +
+      '<p>' + (remaining
+        ? remaining + ' card' + (remaining===1?'':'s') + ' from these decks haven\'t been introduced yet. Pull more below, or come back tomorrow and the review load will be waiting.'
+        : 'Every card in these decks is in rotation. Cards you graded <em>Again</em> come back tomorrow; the rest are spaced out toward the meeting.') +
+      '</p></div>';
+    renderLedger();
+    return;
+  }
+  const own = notes[current.id];
+  const isGap = current.s === "gap";
+  const srcLabel = isGap
+    ? (own ? "Your research" : "Not yet known")
+    : {book:"From the book", web:"Verified online", inferred:"From the contents"}[current.s];
+
+  let body = "";
+  if(revealed){
+    if(isGap){
+      body = own
+        ? '<p class="a">' + para(own) + '</p>'
+        : '<p class="a placeholder">' + current.a + '</p>';
+    } else {
+      body = '<p class="a">' + current.a + '</p>' +
+             (own ? '<p class="mine"><span class="minelabel">Your note</span>' + para(own) + '</p>' : '');
+    }
+  }
+
+  stage.innerHTML =
+    '<article class="card">' +
+      '<div class="eyebrow"><span>' + DECKS[current.d] + '</span><span class="src">' + srcLabel + '</span></div>' +
+      '<p class="q">' + current.q + '</p>' +
+      (revealed ? '<div class="reveal"><div class="leader"></div>' + body + '</div>' : '') +
+      (revealed && !editing
+        ? '<button class="addlink" id="edit">' +
+            (own ? "Edit your answer" : (isGap ? "Write the answer" : "Add a note")) +
+          '</button>'
+        : '') +
+      (editing
+        ? '<div class="editor"><p class="hint">' +
+            (isGap ? "Type what the book says — it replaces the prompt from here on"
+                   : "Your note is kept alongside the card") +
+          '</p><textarea id="noteBox" spellcheck="true"></textarea></div>'
+        : '') +
+      '<div class="spacer"></div>' +
+      '<div class="controls" id="controls"></div>' +
+    '</article>';
+
+  const c = document.getElementById("controls");
+
+  if(editing){
+    const box = document.getElementById("noteBox");
+    box.value = own || "";
+    box.focus();
+    c.innerHTML =
+      '<button class="btn solid" id="saveNote">Save</button>' +
+      '<button class="btn" id="cancelNote">Cancel</button>' +
+      (own ? '<button class="btn again" id="clearNote">Delete</button>' : '');
+    document.getElementById("saveNote").onclick = ()=>{
+      const v = box.value.trim();
+      if(v) notes[current.id] = v; else delete notes[current.id];
+      save(); editing = false; render();
+      setStatus(v ? "Answer saved to this card" : "");
+    };
+    document.getElementById("cancelNote").onclick = ()=>{ editing = false; render(); };
+    const del = document.getElementById("clearNote");
+    if(del) del.onclick = ()=>{ delete notes[current.id]; save(); editing = false; render(); };
+  } else if(!revealed){
+    c.innerHTML = '<button class="btn wide" id="show">Show answer<span class="kbd">space</span></button>';
+    document.getElementById("show").onclick = ()=>{ revealed = true; render(); };
+  } else {
+    c.innerHTML =
+      '<button class="btn again" data-g="again">Again<span class="kbd">1</span></button>' +
+      '<button class="btn" data-g="good">Got it<span class="kbd">2</span></button>' +
+      '<button class="btn solid" data-g="solid">Solid<span class="kbd">3</span></button>';
+    c.querySelectorAll("button").forEach(b=> b.onclick = ()=> grade(b.dataset.g));
+    const e = document.getElementById("edit");
+    if(e) e.onclick = ()=>{ editing = true; render(); };
+  }
+  renderLedger();
+}
+
+function renderLedger(){
+  const el = document.getElementById("ledger");
+  el.innerHTML = "";
+  Object.entries(DECKS).forEach(([k,label])=>{
+    const cards = CARDS.filter(c=>c.d===k);
+    const solid = cards.filter(c=>(progress[c.id]?.box||0) >= 4).length;
+    const pct = Math.round((solid/cards.length)*100);
+    const row = document.createElement("div");
+    row.className = "row";
+    row.innerHTML =
+      '<span class="name">' + label + '</span>' +
+      '<span class="dots"><span style="width:' + pct + '%"></span></span>' +
+      '<span class="num">' + solid + '/' + cards.length + '</span>';
+    el.appendChild(row);
+  });
+}
+
+/* ============================================================
+   WIRE UP
+   ============================================================ */
+document.getElementById("more").onclick = ()=>{
+  buildQueue(10);
+  if(!current) next(); else render();
+  setStatus(queue.length ? "" : "No cards left to pull from these decks");
+};
+document.getElementById("reset").onclick = async ()=>{
+  progress = {}; notes = {};
+  await clearStore();
+  buildQueue(); next(); renderLedger();
+  setStatus("Progress and answers cleared");
+};
+
+const sharePanel = document.getElementById("share");
+const shareBox   = document.getElementById("shareBox");
+document.getElementById("shareBtn").onclick = ()=>{
+  sharePanel.classList.remove("hidden");
+  shareBox.value = JSON.stringify({hbss:1, n:notes}, null, 1);
+  shareBox.focus(); shareBox.select();
+};
+document.getElementById("closeShare").onclick = ()=> sharePanel.classList.add("hidden");
+document.getElementById("mergeBtn").onclick = ()=>{
+  let incoming;
+  try{ incoming = JSON.parse(shareBox.value); }
+  catch(e){ setStatus("That text isn't a valid answer block"); return; }
+  if(!incoming || typeof incoming.n !== "object" || !incoming.n){
+    setStatus("That text isn't a valid answer block"); return;
+  }
+  let count = 0;
+  Object.entries(incoming.n).forEach(([id,val])=>{
+    if(CARDS.some(c=>c.id===id) && typeof val === "string" && val.trim()){
+      notes[id] = val; count++;
+    }
+  });
+  save(); render();
+  setStatus(count ? count + " answer" + (count===1?"":"s") + " merged" : "Nothing new to merge");
+};
+
+document.addEventListener("keydown", e=>{
+  if(!current || editing) return;
+  if(e.target && /^(TEXTAREA|INPUT)$/.test(e.target.tagName)) return;
+  if(e.code === "Space" && !revealed){ e.preventDefault(); revealed = true; render(); }
+  else if(revealed && ["1","2","3"].includes(e.key)){
+    grade({"1":"again","2":"good","3":"solid"}[e.key]);
+  }
+});
+
+(async function init(){
+  renderCountdown();
+  renderFilters();
+  await load();
+  buildQueue();
+  next();
+  renderLedger();
+})();
+</script>
+</body>
+</html>
